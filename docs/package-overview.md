@@ -39,3 +39,21 @@ targets, and its capabilities. Otherwise: "No previewers.">
 
 - Requires `scistudio>=<floor>`.
 - Python `>=3.11`.
+
+## OTA hot-update (#1784)
+
+This package supports SciStudio's in-app Package Manager hot-update. The update
+source is declared once in `[tool.scistudio.ota]` (publish-time source of truth)
+and mirrored in `PackageInfo.ota`; `scripts/validate_contract.py` enforces they
+match.
+
+To publish a new version:
+
+1. Bump `[project].version` in `pyproject.toml` (and `__version__`).
+2. Run `python scripts/ota_publish.py --notes "<what changed>"` (needs `gh`
+   authenticated with write access). Use `--dry-run` to build locally first.
+
+This packs `src/` into a snapshot, hashes it, writes `manifest.json`, and
+uploads both to the package's own public `ota-<channel>` rolling pre-release —
+the exact URL declared in `[tool.scistudio.ota].manifest_url`. Clients running
+core `>= min_core_base` then see the update in the Package Manager.

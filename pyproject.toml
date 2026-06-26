@@ -38,6 +38,17 @@ example = "scistudio_package_example:get_types"
 [project.entry-points."scistudio.previewers"]
 example = "scistudio_package_example.previewers:get_previewers"
 
+# OTA hot-update source (#1784). The publish-time source of truth for
+# scripts/ota_publish.py: it packs src/, hashes it, and uploads manifest.json +
+# the snapshot to `manifest_url`'s release. The same URL/channel are mirrored in
+# the package's PackageInfo.ota (src/.../__init__.py); validate_contract.py
+# enforces they match. `min_core_base` is the minimum core `a.b.c` base a client
+# must run to apply this package — usually the `scistudio>=` floor above.
+[tool.scistudio.ota]
+manifest_url = "https://github.com/jiazhenz026/scistudio-package-example/releases/download/ota-alpha/manifest.json"
+channel = "alpha"
+min_core_base = "0.2.1"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/scistudio_package_example"]
 # Ship any packaged previewer frontend assets in the wheel.
