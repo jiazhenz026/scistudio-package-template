@@ -17,13 +17,21 @@ Three entry points register the package with SciStudio core (mirroring
 
 from __future__ import annotations
 
-from scistudio.blocks.base.package_info import PackageInfo
+from scistudio.blocks.base.package_info import PackageInfo, PackageOtaSource
 
 from scistudio_package_example.blocks import BLOCKS
 from scistudio_package_example.previewers import get_previewers
 from scistudio_package_example.types import ExampleSeries, get_types
 
 __version__ = "0.1.0"
+
+# OTA hot-update source (#1784). The in-app Package Manager reads this to check
+# for newer releases. Keep these constants in sync with the
+# ``[tool.scistudio.ota]`` table in pyproject.toml (the publish-time source of
+# truth): ``scripts/validate_contract.py`` enforces that they match, and
+# ``scripts/ota_publish.py`` publishes to this exact manifest URL.
+OTA_MANIFEST_URL = "https://github.com/jiazhenz026/scistudio-package-example/releases/download/ota-alpha/manifest.json"
+OTA_CHANNEL = "alpha"
 
 
 def get_package_info() -> PackageInfo:
@@ -33,6 +41,7 @@ def get_package_info() -> PackageInfo:
         description="Example SciStudio package.",
         author="SciStudio Contributors",
         version=__version__,
+        ota=PackageOtaSource(manifest_url=OTA_MANIFEST_URL, channel=OTA_CHANNEL),
     )
 
 
