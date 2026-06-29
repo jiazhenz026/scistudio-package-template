@@ -1,0 +1,90 @@
+{
+  "package": "scistudio_package_example",
+  "surface": [
+    {
+      "kind": "class",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.blocks.example:ExampleBlock",
+      "tier": "stable"
+    },
+    {
+      "kind": "data",
+      "since": null,
+      "symbol": "scistudio_package_example.blocks:BLOCKS",
+      "tier": null
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.previewers:get_previewers",
+      "tier": "stable"
+    },
+    {
+      "kind": "class",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.types:ExampleSeries",
+      "tier": "stable"
+    },
+    {
+      "kind": "class",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.types:ExampleSeries.Meta",
+      "tier": "stable"
+    },
+    {
+      "kind": "classmethod",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.types:ExampleSeries.from_arrays",
+      "tier": "stable"
+    },
+    {
+      "kind": "data",
+      "since": null,
+      "symbol": "scistudio_package_example.types:INDEX_NAME",
+      "tier": null
+    },
+    {
+      "kind": "data",
+      "since": null,
+      "symbol": "scistudio_package_example.types:VALUE_NAME",
+      "tier": null
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example.types:get_types",
+      "tier": "stable"
+    },
+    {
+      "kind": "data",
+      "since": null,
+      "symbol": "scistudio_package_example:__version__",
+      "tier": null
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example:describe_public_api",
+      "tier": "provisional"
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example:get_block_package",
+      "tier": "stable"
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example:get_blocks",
+      "tier": "stable"
+    },
+    {
+      "kind": "function",
+      "since": "0.1.0",
+      "symbol": "scistudio_package_example:get_package_info",
+      "tier": "stable"
+    }
+  ],
+  "version": "0.1.0"
+}

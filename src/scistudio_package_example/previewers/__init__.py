@@ -26,7 +26,10 @@ from __future__ import annotations
 
 from typing import Any
 
+from scistudio.stability import stable
 
+
+@stable(since="0.1.0")
 def get_previewers() -> list[Any]:
     """Return the package's previewer specs for ``scistudio.previewers``.
 
