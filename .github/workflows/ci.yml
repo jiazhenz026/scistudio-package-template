@@ -20,7 +20,11 @@ env:
 
 jobs:
   quality:
-    name: Lint · Type · Test · Contract · Freeze · Docs
+    # Keep this display name matching the "Rules for Agents" ruleset's required
+    # status check context ("Lint · Type · Test · Contract (3.x)"). The job also
+    # runs the freeze + docs steps below; renaming the check would orphan the
+    # required context and block merges. Update the ruleset before renaming.
+    name: Lint · Type · Test · Contract
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
