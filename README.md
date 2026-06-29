@@ -35,6 +35,7 @@ The conventions follow `scistudio-blocks-spectroscopy`, the reference package.
 .
 ├── AGENTS.md                       # contributor + AI-agent rules (lightweight)
 ├── CONTRIBUTING.md                 # dev setup, local checks, release
+├── hatch_build.py                  # stages _scistudio_docs before wheel build
 ├── LICENSE                         # MIT
 ├── mkdocs.yml                      # generated API reference (mkdocstrings/griffe)
 ├── pyproject.toml                  # hatchling + ruff/mypy/pytest + entry points
@@ -48,6 +49,7 @@ The conventions follow `scistudio-blocks-spectroscopy`, the reference package.
 │   ├── reference.md                # generated API reference page
 │   └── ui-style-guide.md           # make a previewer/panel UI look like SciStudio
 ├── scripts/
+│   ├── build_package_docs.py       # builds wheel-bundled docs for project injection
 │   ├── validate_contract.py        # entry-point + registry + §13.1 reuse-surface check
 │   └── snapshot_api.py             # compute/freeze the public surface (ADR-052 §15)
 ├── src/scistudio_package_example/   # example: 1 type (+ contract skeletons), 1 block, previewers stub
@@ -62,6 +64,8 @@ The conventions follow `scistudio-blocks-spectroscopy`, the reference package.
   docs to the standard.
 - `python scripts/validate_contract.py` + `scistudio blocks` prove the package
   still installs into core. CI runs both.
+- `python -m build` stages `src/<module>/_scistudio_docs/` and includes it in
+  the wheel, so SciStudio core can inject installed package docs into projects.
 
 ## The developer-facing contract (ADR-052 §13)
 
@@ -88,6 +92,22 @@ The authoritative contract is the core spec
 (`docs/specs/adr-052-public-api-surface.md` §13) and ADR-052; this template
 models it. Your package transcribes its own §13.1 table into
 `docs/package-overview.md`.
+
+## Wheel-bundled docs
+
+During wheel builds, Hatch runs `hatch_build.py`, which calls
+`scripts/build_package_docs.py`. The script generates a package-local
+`_scistudio_docs/` bundle containing:
+
+- `manifest.json` with package name, version, slug, and description.
+- `agent-reference/README.md` for embedded agents.
+- `api-reference/index.md`, `mkdocs-reference.md`, `package-overview.md`, and
+  the frozen public surface snapshot.
+- `user-guide/` copies of the README and package docs.
+
+SciStudio core discovers this directory from installed packages and copies it
+into each project's package reference docs. The generated directory is ignored
+in git; the wheel build recreates it.
 
 ## Develop the example locally
 

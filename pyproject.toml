@@ -59,12 +59,17 @@ min_core_base = "0.3.1"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/scistudio_package_example"]
-# Ship any packaged previewer frontend assets in the wheel.
+# Ship packaged previewer frontend assets and the build-generated SciStudio
+# package docs bundle in the wheel.
 artifacts = [
     "src/scistudio_package_example/previewers/assets/*.js",
     "src/scistudio_package_example/previewers/assets/*.mjs",
     "src/scistudio_package_example/previewers/assets/*.css",
+    "src/scistudio_package_example/_scistudio_docs/**/*",
 ]
+
+[tool.hatch.build.hooks.custom]
+path = "hatch_build.py"
 
 # Lint/format/type config mirrors SciStudio core so authors get the same
 # feedback locally as in the monorepo.

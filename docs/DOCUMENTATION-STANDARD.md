@@ -16,6 +16,7 @@ The reference implementation of this standard is
 | `docs/package-overview.md` | "What's in this package" — the structured catalog. |
 | `CHANGELOG.md` | One entry per release; follows Keep a Changelog. |
 | `LICENSE` | MIT (matches core). |
+| wheel `_scistudio_docs/` | Generated at wheel build time for SciStudio project injection. |
 
 ## 2. `README.md` required sections
 
@@ -56,3 +57,26 @@ in `get_blocks()` but is absent here (or vice-versa) is a documentation defect.
   (`test_readme_blocks.py`).
 - Document compatibility: when the `scistudio>=X` floor changes, say why in
   `CHANGELOG.md`.
+
+## 6. Wheel-bundled docs
+
+SciStudio core reads installed package docs from a package-local
+`_scistudio_docs/` directory. This template generates that directory during
+wheel builds; do not edit it by hand or commit it. Keep these source files
+current instead:
+
+- `README.md`
+- `docs/package-overview.md`
+- `docs/reference.md`
+- `docs/ui-style-guide.md`
+- `tests/api/public_surface.snapshot.json`
+
+The generated bundle must include:
+
+- `manifest.json` with the distribution name, version, slug, and description.
+- `agent-reference/README.md` for embedded agents.
+- `api-reference/index.md` plus the MkDocs reference source and public surface
+  snapshot.
+- `api-reference/package-overview.md` so the agent-facing docs include the
+  package catalog even when copied without the user guide.
+- `user-guide/` copies of the package overview and user-facing docs.
