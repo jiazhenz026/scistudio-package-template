@@ -10,6 +10,8 @@ guide ``docs/block-development/previewers-and-plots.md``:
   1. Write backend provider callables (a ``providers.py`` module).
   2. Ship the frontend asset under ``assets/`` (e.g. ``viewer.js``) and list it
      in ``[tool.hatch.build.targets.wheel].artifacts`` in ``pyproject.toml``.
+     Style it to look like SciStudio (use the brand ``--ss-*`` CSS tokens, not
+     stock grey/blue) — see ``docs/ui-style-guide.md``.
   3. Return ``PreviewerSpec`` records here, for example::
 
          from scistudio.previewers.models import (

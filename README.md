@@ -39,7 +39,8 @@ The conventions follow `scistudio-blocks-spectroscopy`, the reference package.
 │   └── pull_request_template.md    # the gate is this checklist
 ├── docs/
 │   ├── DOCUMENTATION-STANDARD.md   # what every package's docs must contain
-│   └── package-overview.md         # fill-in catalog template
+│   ├── package-overview.md         # fill-in catalog template
+│   └── ui-style-guide.md           # make a previewer/panel UI look like SciStudio
 ├── scripts/validate_contract.py    # entry-point + registry contract check
 ├── src/scistudio_package_example/   # minimal example: 1 type, 1 block, previewers stub
 └── tests/                          # packaging · contract · block tests
