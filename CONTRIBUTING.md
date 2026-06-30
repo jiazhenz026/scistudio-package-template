@@ -33,6 +33,7 @@ pytest                           # tests
 python scripts/validate_contract.py   # SciStudio plugin + ADR-052 §13.1 contract
 python scripts/snapshot_api.py        # ADR-052 §15 public-API surface freeze
 mkdocs build --strict                 # ADR-052 §7 generated API reference (.[docs])
+python scripts/build_package_docs.py  # stage _scistudio_docs for wheel injection
 python -m build                  # wheel + sdist
 ```
 
@@ -46,6 +47,10 @@ python scripts/snapshot_api.py --write   # update tests/api/public_surface.snaps
 
 The snapshot and freeze test under `tests/api/**` are owner-reviewed
 (`.github/CODEOWNERS`), so the public contract cannot drift without sign-off.
+
+`python -m build` runs the docs staging hook automatically for wheels. The
+explicit `scripts/build_package_docs.py` command is useful when you want to
+inspect the exact `_scistudio_docs/` bundle before building.
 
 ## Branch, commit, PR
 
